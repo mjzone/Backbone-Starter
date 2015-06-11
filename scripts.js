@@ -23,7 +23,7 @@ var blog2 = new Blog({
 });
 
 // instantiate a collection
-var blogs = new Blogs([blog1, blog2]);
+var blogs = new Blogs();
 
 // backbone view for one blog
 var BlogView = Backbone.View.extend({
@@ -44,6 +44,16 @@ var BlogsView = Backbone.View.extend({
     el: $('.blogs-list'),
     initialize: function() {
         this.model.on('add', this.render, this);
+    },
+    events:{
+        'click .edit-blog':'edit',
+        'click .delete-blog' : 'delete'
+    },
+    edit:function(){
+        alert("editing...");
+    },
+    delete:function(){
+        alert("Delete success.");
     },
     render: function() {
         var self = this;
@@ -66,5 +76,8 @@ $(document).ready(function() {
         });
         console.log(blog.toJSON());
         blogs.add(blog);
+        $('.author-input').val('');
+        $('.title-input').val('')
+        $('.url-input').val('');
     })
 });
